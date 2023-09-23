@@ -22,13 +22,13 @@ jobs:
       run: |
         rm -rf /tmp/WLEDtemp/* || true
         mkdir -p /tmp/WLEDtemp
-        wget https://github.com/atuline/WLED/archive/refs/heads/dev.zip -O /tmp/WLEDtemp/mm.zip
+        wget https://github.com/moonmodules/WLED/archive/refs/heads/32channel_GEQ_audio.zip -O /tmp/WLEDtemp/mm.zip
         unzip /tmp/WLEDtemp/mm.zip -d /tmp/WLEDtemp
         find /tmp/WLEDtemp -maxdepth 1 -mindepth 1 -name "*" -type d >> /tmp/WLEDtemp/wledfoldername
         cd `cat /tmp/WLEDtemp/wledfoldername`
         echo '[env:custom_build]' >>platformio.ini
-        echo 'extends = env:esp32dev' >>platformio.ini
-        echo 'build_flags = ${env:esp32dev.build_flags} -D WLED_DISABLE_BROWNOUT_DET' >>platformio.ini
+        echo 'extends = env:nodemcuv2' >>platformio.ini
+        echo 'build_flags = ${env:nodemcuv2.build_flags} -D WLED_DISABLE_BROWNOUT_DET -D ABL_MILLIAMPS_DEFAULT=0 -D USERMOD_PING_PONG_CLOCK' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
     - name: Copy Files
