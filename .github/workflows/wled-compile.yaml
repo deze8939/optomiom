@@ -28,7 +28,7 @@ jobs:
         cd `cat /tmp/WLEDtemp/wledfoldername`
         echo '[env:custom_build]' >>platformio.ini
         echo 'extends = env:nodemcuv2' >>platformio.ini
-        echo 'build_flags = ${env:nodemcuv2.build_flags} -D WLED_DISABLE_BROWNOUT_DET -D ABL_MILLIAMPS_DEFAULT=0 -D USERMOD_PING_PONG_CLOCK' >>platformio.ini
+        echo 'build_flags = ${env:nodemcuv2.build_flags} -D WLED_DISABLE_BROWNOUT_DET' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
     - name: Copy Files
